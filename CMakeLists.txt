@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.6)
+project(MOM6 C Fortran)
+
+execute_process(COMMAND nf-config --fflags OUTPUT_VARIABLE NETCDF_FFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+execute_process(COMMAND nf-config --flibs OUTPUT_VARIABLE NETCDF_FLIBS OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message("Using Fortran: ${CMAKE_Fortran_COMPILER_ID} and C: ${CMAKE_C_COMPILER_ID}")
+
+if(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
+  set(FFLAGS "-fno-alias -auto -safe-cray-ptr -ftz -assume byterecl -i4 -r8 -nowarn -sox -traceback")
+  set(FFLAGS_RELEASE "${FFLAGS} -O2 -debug minimal -fp-model source")
+  set(FFLAGS_DEBUG "${FFLAGS} -g -O0 -check -check noarg_temp_created -check nopointer -warn -warn noerrors -fpe0 -ftrapuv")
+elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
+  set(FFLAGS "-fcray-pointer -fdefault-real-8 -fdefault-double-8 -Waliasing -ffree-line-length-none -fno-range-check -O3")
+endif()
+
+set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} ${FFLAGS_DEBUG} ${NETCDF_FFLAGS}")
+set(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${FFLAGS_RELEASE} ${NETCDF_FFLAGS}")
+
+if(CMAKE_C_COMPILER_ID STREQUAL "Intel")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -sox -traceback -O2 -debug minimal")
+elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
+endif()
+
+message("Using Fortran flags: ${CMAKE_Fortran_FLAGS}")
+message("NetCDF libs: ${NETCDF_FLIBS}")
+
+add_definitions(-Duse_libMPI -Duse_netCDF -Duse_LARGEFILE -DSPMD -D__IFC)
+
+add_subdirectory(FMS)
+add_subdirectory(MOM6)
