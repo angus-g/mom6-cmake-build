@@ -7,11 +7,13 @@ execute_process(COMMAND nf-config --flibs OUTPUT_VARIABLE NETCDF_FLIBS OUTPUT_ST
 message("Using Fortran: ${CMAKE_Fortran_COMPILER_ID} and C: ${CMAKE_C_COMPILER_ID}")
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
-  set(FFLAGS "-fno-alias -auto -safe-cray-ptr -ftz -assume byterecl -i4 -r8 -nowarn -sox -traceback")
-  set(FFLAGS_RELEASE "${FFLAGS} -O2 -debug minimal -fp-model source")
+  set(FFLAGS "-fno-alias -stack_temps -safe-cray-ptr -ftz -i_dynamic -assume byterecl -i4 -r8 -nowarn -sox -traceback")
+  set(FFLAGS_RELEASE "${FFLAGS} -O2 -fp-model source")
   set(FFLAGS_DEBUG "${FFLAGS} -g -O0 -check -check noarg_temp_created -check nopointer -warn -warn noerrors -fpe0 -ftrapuv")
 elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
-  set(FFLAGS "-fcray-pointer -fdefault-real-8 -fdefault-double-8 -Waliasing -ffree-line-length-none -fno-range-check -O3")
+  set(FFLAGS "-fcray-pointer -fdefault-real-8 -fdefault-double-8 -Waliasing -ffree-line-length-none -fno-range-check")
+  set(FFLAGS_RELEASE "${FFLAGS} -O2 -fbounds-check")
+  set(FFLAGS_DEBUG "${FFLAGS} -O0 -g -W -fbounds-check -fbacktrace -ffpe-trap=invalid,zero,overflow")
 endif()
 
 set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} ${FFLAGS_DEBUG} ${NETCDF_FFLAGS}")
