@@ -1,0 +1,8 @@
+CMakeCache.txt
+CMakeFiles/
+*.mod
+Makefile
+cmake_install.cmake
+
+MOM6/MOM6
+FMS/libFMS.a
