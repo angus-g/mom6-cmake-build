@@ -5,6 +5,7 @@ find_package(MPI REQUIRED)
 add_definitions(${MPI_Fortran_COMPILE_FLAGS})
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 link_directories(${MPI_Fortran_LIBRARIES})
+set(CMAKE_C_COMPILER ${MPI_C_COMPILER})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
 find_package (NetCDF REQUIRED COMPONENTS F90 C)
