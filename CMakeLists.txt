@@ -6,6 +6,10 @@ add_definitions(${MPI_Fortran_COMPILE_FLAGS})
 include_directories(${MPI_Fortran_INCLUDE_PATH})
 link_directories(${MPI_Fortran_LIBRARIES})
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
+find_package (NetCDF REQUIRED COMPONENTS F90 C)
+include_directories(${NETCDF_F90_INCLUDE_DIRS})
+
 execute_process(COMMAND nf-config --fflags OUTPUT_VARIABLE NETCDF_FFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
 execute_process(COMMAND nf-config --flibs OUTPUT_VARIABLE NETCDF_FLIBS OUTPUT_STRIP_TRAILING_WHITESPACE)
 
@@ -32,8 +36,9 @@ endif()
 
 message("Using Fortran flags: ${CMAKE_Fortran_FLAGS} ${CMAKE_Fortran_FLAGS_${CMAKE_BUILD_TYPE}}")
 message("NetCDF libs: ${NETCDF_FLIBS}")
+message("NetCDF libs: ${NETCDF_F90_LIBRARIES}")
 
 add_definitions(-Duse_libMPI -Duse_netCDF -Duse_LARGEFILE -DSPMD -D__IFC)
-
 add_subdirectory(FMS)
 add_subdirectory(MOM6)
+add_subdirectory(MOM6-SIS2-coupled)
