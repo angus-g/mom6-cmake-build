@@ -5,4 +5,5 @@ Makefile
 cmake_install.cmake
 
 MOM6/MOM6
+MOM6-SIS2-coupled/MOM6-SIS2-coupled
 FMS/libFMS.a
