@@ -5,6 +5,10 @@ Use `cmake` to build the *ocean_only* and *MOM6-SIS2-coupled* configurations of
 [FMS](https://github.com/NOAA-GFDL/FMS).
 
 ## Instructions
+0. **Optional**: Follow [these 
+   steps](https://gist.github.com/anders-dc/5b49f181b003c1995a28802f5d9fe329) to 
+   set up the build environment.
+
 1. Clone this repository to the root folder of
    [MOM6-examples](https://github.com/NOAA-GFDL/MOM6-examples):
 
