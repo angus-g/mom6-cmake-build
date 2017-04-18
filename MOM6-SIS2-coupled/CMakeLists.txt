@@ -20,5 +20,5 @@ add_executable(MOM6-SIS2-coupled ${MOM6_SOURCE} ${MOM6_SIS2_COUPLED_SOURCE})
 target_include_directories(MOM6-SIS2-coupled PRIVATE
   $<TARGET_FILE_DIR:FMS> ${MOM6_DIR}/config_src/dynamic 
   ${MOM6_DIR}/src/framework ${MOM6_DIR}/../SIS2 ${MOM6_DIR}/../FMS/include)
-target_link_libraries(MOM6-SIS2-coupled FMS z ${NETCDF_FLIBS} 
-  ${NETCDF_F90_LIBRARIES} ${NETCDF_C_LIBRARIES} ${MPI_Fortran_LIBRARIES})
+target_link_libraries(MOM6-SIS2-coupled FMS z ${NETCDF_F90_LIBRARIES} 
+  ${NETCDF_C_LIBRARIES} ${MPI_Fortran_LIBRARIES})

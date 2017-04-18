@@ -7,12 +7,12 @@ include_directories(${MPI_Fortran_INCLUDE_PATH})
 link_directories(${MPI_Fortran_LIBRARIES})
 set(CMAKE_C_COMPILER ${MPI_C_COMPILER})
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
-find_package (NetCDF REQUIRED COMPONENTS F90 C)
+execute_process(COMMAND nf-config --prefix OUTPUT_VARIABLE NETCDF_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+find_package(NetCDF REQUIRED COMPONENTS F90 C)
 include_directories(${NETCDF_F90_INCLUDE_DIRS})
-
-execute_process(COMMAND nf-config --fflags OUTPUT_VARIABLE NETCDF_FFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-execute_process(COMMAND nf-config --flibs OUTPUT_VARIABLE NETCDF_FLIBS OUTPUT_STRIP_TRAILING_WHITESPACE)
+message("NETCDF_LIBRARY: ${NETCDF_LIBRARY}")
 
 message("Using Fortran: ${CMAKE_Fortran_COMPILER_ID} and C: ${CMAKE_C_COMPILER_ID}")
 
@@ -36,7 +36,6 @@ elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
 endif()
 
 message("Using Fortran flags: ${CMAKE_Fortran_FLAGS} ${CMAKE_Fortran_FLAGS_${CMAKE_BUILD_TYPE}}")
-message("NetCDF libs: ${NETCDF_FLIBS}")
 message("NetCDF libs: ${NETCDF_F90_LIBRARIES}")
 
 add_definitions(-Duse_libMPI -Duse_netCDF -Duse_LARGEFILE -DSPMD -D__IFC)
