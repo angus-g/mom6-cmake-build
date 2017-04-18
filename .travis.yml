@@ -1,0 +1,20 @@
+language: generic
+
+addons:
+  apt:
+    sources:
+      - kalakris-cmake
+    packages:
+      - cmake
+      - gfortran
+      - libnetcdf-dev
+      - libopenmpi-dev
+
+install:
+  - mkdir ../src && cd ../src
+  - git clone --depth 1 --recursive --branch cmake https://github.com/angus-g/FMS.git
+  - git clone --depth 1 --recursive https://github.com/NOAA-GFDL/MOM6.git
+
+script:
+  - mkdir ../build && cd ../build && cmake -DCMAKE_BUILD_TYPE=RELEASE ../mom6-cmake-build
+  - make -j MOM6
