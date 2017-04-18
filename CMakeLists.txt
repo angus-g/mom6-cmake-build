@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.11)
 project(MOM6 C Fortran)
 
 find_package(MPI REQUIRED)
