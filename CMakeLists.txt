@@ -18,13 +18,14 @@ message("Using Fortran: ${CMAKE_Fortran_COMPILER_ID} and C: ${CMAKE_C_COMPILER_I
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
   set(CMAKE_Fortran_FLAGS
-    "${NETCDF_FFLAGS} -fno-alias -auto -safe-cray-ptr -ftz -assume byterecl -i4 -r8 -nowarn -sox -traceback")
+    "${CMAKE_Fortran_FLAGS} -fno-alias -auto -safe-cray-ptr -ftz -assume byterecl -i4 -r8 -nowarn -sox -traceback")
   set(CMAKE_Fortran_FLAGS_RELEASE
     "-O2 -debug minimal -fp-model source")
   set(CMAKE_Fortran_FLAGS_DEBUG
     "-g -O0 -check -check noarg_temp_created -check nopointer -warn -warn noerrors -fpe0 -ftrapuv")
 elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
-  set(CMAKE_Fortran_FLAGS "-fcray-pointer -fdefault-real-8 -fdefault-double-8 -Waliasing -ffree-line-length-none -fno-range-check")
+  set(CMAKE_Fortran_FLAGS
+    "${CMAKE_Fortran_FLAGS} -fcray-pointer -fdefault-real-8 -fdefault-double-8 -Waliasing -ffree-line-length-none -fno-range-check")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O2 -fbounds-check")
   set(CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -W -fbounds-check -fbacktrace -ffpe-trap=invalid,zero,overflow")
 endif()
