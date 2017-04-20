@@ -38,7 +38,7 @@ elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
 endif()
 
 message("Using Fortran flags: ${CMAKE_Fortran_FLAGS} ${CMAKE_Fortran_FLAGS_${CMAKE_BUILD_TYPE}}")
-message("NetCDF libs: ${NETCDF_F90_LIBRARIES}")
+message("NetCDF libs: ${NETCDF_LIBRARIES}")
 
 add_definitions(-Duse_libMPI -Duse_netCDF -Duse_LARGEFILE -DSPMD -D__IFC)
 add_subdirectory(FMS)

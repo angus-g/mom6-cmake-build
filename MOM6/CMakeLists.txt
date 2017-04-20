@@ -10,4 +10,4 @@ file(GLOB_RECURSE MOM6_SOLO_SOURCE LIST_DIRECTORIES false
 add_executable(MOM6 ${MOM6_SOURCE} ${MOM6_SOLO_SOURCE})
 target_include_directories(MOM6 PRIVATE
   $<TARGET_FILE_DIR:FMS> ${MOM6_DIR}/config_src/dynamic ${MOM6_DIR}/src/framework)
-target_link_libraries(MOM6 FMS z ${NETCDF_F90_LIBRARIES} ${MPI_Fortran_LIBRARIES})
+target_link_libraries(MOM6 FMS z ${NETCDF_LIBRARIES} ${MPI_Fortran_LIBRARIES})
