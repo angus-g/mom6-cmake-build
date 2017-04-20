@@ -1,4 +1,4 @@
-set(FMS_DIR "${CMAKE_SOURCE_DIR}/../src/FMS")
+set(FMS_DIR "${SOURCE_ROOT_DIR}/FMS")
 
 # FMS static library
 file(GLOB_RECURSE FMS_SOURCE LIST_DIRECTORIES false

@@ -1,4 +1,4 @@
-set(MOM6_DIR "${CMAKE_SOURCE_DIR}/../src/MOM6")
+set(MOM6_DIR "${SOURCE_ROOT_DIR}/MOM6")
 
 # common files for both builds
 file(GLOB_RECURSE MOM6_SOURCE LIST_DIRECTORIES false FOLLOW_SYMLINKS

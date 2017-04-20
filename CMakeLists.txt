@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.11)
 project(MOM6 C Fortran)
 
+set(SOURCE_ROOT_DIR "${CMAKE_SOURCE_DIR}/../src" CACHE PATH
+  "Path to directory containing MOM6 components (MOM6, FMS, etc.)")
+
 find_package(MPI REQUIRED)
 add_definitions(${MPI_Fortran_COMPILE_FLAGS})
 include_directories(${MPI_Fortran_INCLUDE_PATH})
