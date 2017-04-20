@@ -7,12 +7,13 @@ include_directories(${MPI_Fortran_INCLUDE_PATH})
 link_directories(${MPI_Fortran_LIBRARIES})
 set(CMAKE_C_COMPILER ${MPI_C_COMPILER})
 
-execute_process(COMMAND nf-config --prefix OUTPUT_VARIABLE NETCDF_DIR
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
+if("${NETCDF_DIR}" STREQUAL "")
+  execute_process(COMMAND nf-config --prefix OUTPUT_VARIABLE NETCDF_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+endif()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 find_package(NetCDF REQUIRED COMPONENTS F90 C)
 include_directories(${NETCDF_F90_INCLUDE_DIRS})
-message("NETCDF_LIBRARY: ${NETCDF_LIBRARY}")
 
 message("Using Fortran: ${CMAKE_Fortran_COMPILER_ID} and C: ${CMAKE_C_COMPILER_ID}")
 
