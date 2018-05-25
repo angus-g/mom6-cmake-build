@@ -8,7 +8,6 @@ addons:
       - cmake
       - gfortran
       - libnetcdf-dev
-      - libnetcdff-dev
       - libopenmpi-dev
 
 install:
