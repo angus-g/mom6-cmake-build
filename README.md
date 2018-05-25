@@ -14,7 +14,10 @@ Use `cmake` to build the *ocean_only* and *MOM6-SIS2-coupled* configurations of
    The preprocessor conditionals in `fft.F90` of FMS do not play well with
    CMake.  Open `src/FMS/fft/fft.F90` and copy the contents of line *48* (`use
    fft99_mod, only: fft991, set99` to line *46* (outside the preprocessor
-   conditional block).  Save and exit.
+   conditional block).  Save and exit.  Alternatively, this can be done with 
+   the following command in the root folder:
+
+        sed -i "46i use    fft99_mod, only: fft991, set99" src/FMS/fft/fft.F90
 
 3. Make directories for debug and release builds:
 
