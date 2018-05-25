@@ -18,6 +18,7 @@ install:
 
 script:
   - "mkdir build_release && cd build_release &&
-    cmake -DCMAKE_BUILD_TYPE=RELEASE ../../mom6-cmake-build"
+    cp -r ../../mom6-cmake-build ../build_config &&
+    cmake -DCMAKE_BUILD_TYPE=RELEASE ../build_config"
   - make -j MOM6
   - make -j MOM6-SIS2-coupled
