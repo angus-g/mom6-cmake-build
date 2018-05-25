@@ -13,6 +13,7 @@ addons:
 install:
   - mkdir ../src && cd ../src
   - git clone --depth 1 --recursive https://github.com/NOAA-GFDL/FMS.git
+  - sed -i "46i use    fft99_mod, only: fft991, set99" FMS/fft/fft.F90
   - git clone --depth 1 --recursive https://github.com/NOAA-GFDL/MOM6.git
 
 script:
