@@ -11,11 +11,13 @@ addons:
       - libopenmpi-dev
 
 install:
-  - mkdir ../src && cd ../src
-  - "git clone --depth 1 --recursive https://github.com/NOAA-GFDL/FMS.git &&
-    sed -i \"46i use    fft99_mod, only: fft991, set99\" FMS/fft/fft.F90"
-  - git clone --depth 1 --recursive https://github.com/NOAA-GFDL/MOM6.git
+  - "cd .. && 
+    git clone --depth 1 --recursive https://github.com/NOAA-GFDL/MOM6-examples &&
+    cd MOM6-examples &&
+    sed -i \"46i use    fft99_mod, only: fft991, set99\" src/FMS/fft/fft.F90"
 
 script:
-  - mkdir ../build && cd ../build && cmake -DCMAKE_BUILD_TYPE=RELEASE ../mom6-cmake-build
+  - "mkdir build_release && cd build_release &&
+    cmake -DCMAKE_BUILD_TYPE=RELEASE ../../mom6-cmake-build"
   - make -j MOM6
+  - make -j MOM6-SIS2-coupled
