@@ -1,5 +1,7 @@
 # mom6-cmake-build
 
+[![Build Status](https://travis-ci.org/angus-c/mom6-cmake-build.svg?branch=master)](https://travis-ci.org/angus-g/mom6-cmake-build)
+
 Use `cmake` to build the *ocean_only* and *MOM6-SIS2-coupled* configurations of
 [MOM6](https://github.com/NOAA-GFDL/MOM6) with
 [FMS](https://github.com/NOAA-GFDL/FMS).
